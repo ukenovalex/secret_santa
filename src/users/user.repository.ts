@@ -1,4 +1,4 @@
-import { UserModel } from '@prisma/client';
+import { Prisma, UserModel, WishModel } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 import { IPrismaService } from '../database/prisma.service.interface';
 import { TYPES } from '../types';
@@ -18,11 +18,12 @@ export class UserRepository implements IUserRepository {
 		});
 	}
 
-	async find(email: string): Promise<UserModel | null> {
+	async find(email: string): Promise<(UserModel & { wishes: WishModel[] }) | null> {
 		return this.prismaService.client.userModel.findFirst({
 			where: {
 				email,
 			},
+			include: { wishes: true },
 		});
 	}
 }

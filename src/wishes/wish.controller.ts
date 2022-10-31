@@ -19,28 +19,18 @@ export class WishController extends BaseController implements IWishController {
 		super(loggerService);
 		this.bindRoutes([
 			{
-				path: '/',
-				method: 'get',
-				func: this.getWishList,
-				middlewares: [new AuthGuard()],
-			},
-			{
-				path: '/',
+				path: '/wish',
 				method: 'post',
 				func: this.createWish,
 				middlewares: [new AuthGuard()],
 			},
 			{
-				path: '/',
+				path: '/wish',
 				method: 'delete',
 				func: this.removeWish,
 				middlewares: [new AuthGuard()],
 			},
 		]);
-	}
-	async getWishList({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-		const wishList = await this.wishService.getWishList(user);
-		this.ok(res, { wishList });
 	}
 	async createWish(
 		{ body, user }: Request<{}, {}, WishSaveDto>,

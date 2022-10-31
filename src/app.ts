@@ -38,8 +38,8 @@ export class App {
 	}
 
 	useRoutes(): void {
-		this.app.use('/api/user', this.userController.getRouter());
-		this.app.use('/api/wish', this.wishController.getRouter());
+		this.app.use('/api', this.userController.getRouter());
+		this.app.use('/api', this.wishController.getRouter());
 	}
 
 	useExceptionFilters(): void {

@@ -6,8 +6,6 @@ export class User {
 	constructor(
 		private readonly _email: string,
 		private readonly _name: string,
-		private readonly _isSanta: boolean,
-		private readonly _isHasSanta: boolean,
 		passwordHash?: string,
 	) {
 		if (passwordHash) {
@@ -25,14 +23,6 @@ export class User {
 
 	get password(): string {
 		return this._password;
-	}
-
-	get isSanta(): boolean {
-		return this._isHasSanta;
-	}
-
-	get isHasSanta(): boolean {
-		return this._isSanta;
 	}
 
 	public async setPassword(pass: string, salt: number): Promise<void> {

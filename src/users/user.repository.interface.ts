@@ -1,7 +1,7 @@
-import { UserModel } from '@prisma/client';
+import { UserModel, WishModel } from '@prisma/client';
 import { User } from './user.entity';
 
 export interface IUserRepository {
 	create: (user: User) => Promise<UserModel>;
-	find: (email: string) => Promise<UserModel | null>;
+	find: (email: string) => Promise<(UserModel & { wishes: WishModel[] }) | null>;
 }

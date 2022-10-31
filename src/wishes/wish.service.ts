@@ -15,14 +15,6 @@ export class WishService implements IWishService {
 		@inject(TYPES.WishRepository) private wishRepository: IWishRepository,
 		@inject(TYPES.IUserService) private userService: IUserService,
 	) {}
-	async getWishList(email: string): Promise<WishModel[]> {
-		const user = await this.userService.getUserInfo(email);
-		if (user) {
-			return await this.wishRepository.getAllWishes(user?.id);
-		} else {
-			throw new HTTPError(422, 'User Not Found');
-		}
-	}
 	async createWish(wish: WishSaveDto, email: string): Promise<WishModel> {
 		const user = await this.userService.getUserInfo(email);
 		if (user) {
