@@ -15,6 +15,10 @@ import { IPrismaService } from './database/prisma.service.interface';
 import { PrismaService } from './database/prisma.service';
 import { IUserRepository } from './users/user.repository.interface';
 import { UserRepository } from './users/user.repository';
+import IWishController from './wishes/wish.controller.interface';
+import { WishController } from './wishes/wish.controller';
+import { IWishService } from './wishes/wish.service.interface';
+import { WishService } from './wishes/wish.service';
 
 interface IBootstrap {
 	app: App;
@@ -26,6 +30,8 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IExceptionFilter>(TYPES.ExceptionFilter).to(ExceptionFilter).inSingletonScope();
 	bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
 	bind<IUserController>(TYPES.IUserController).to(UserController).inSingletonScope();
+	bind<IWishController>(TYPES.IWishController).to(WishController).inSingletonScope();
+	bind<IWishService>(TYPES.IWishService).to(WishService).inSingletonScope();
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<IPrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();

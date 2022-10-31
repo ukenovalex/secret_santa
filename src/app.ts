@@ -11,6 +11,7 @@ import { IExceptionFilter } from './errors/exception.filter.interface';
 import { IPrismaService } from './database/prisma.service.interface';
 import 'reflect-metadata';
 import { AuthMiddleware } from './common/auth.middleware';
+import IWishController from './wishes/wish.controller.interface';
 
 @injectable()
 export class App {
@@ -21,6 +22,7 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.IUserController) private userController: IUserController,
+		@inject(TYPES.IWishController) private wishController: IWishController,
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private prismaService: IPrismaService,
@@ -36,7 +38,8 @@ export class App {
 	}
 
 	useRoutes(): void {
-		this.app.use('/users', this.userController.getRouter());
+		this.app.use('/api/user', this.userController.getRouter());
+		this.app.use('/api/wish', this.wishController.getRouter());
 	}
 
 	useExceptionFilters(): void {

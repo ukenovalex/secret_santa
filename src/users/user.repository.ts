@@ -8,12 +8,11 @@ import { IUserRepository } from './user.repository.interface';
 @injectable()
 export class UserRepository implements IUserRepository {
 	constructor(@inject(TYPES.PrismaService) private prismaService: IPrismaService) {}
-	async create({ email, password, name, isSanta }: User): Promise<UserModel> {
+	async create({ email, password, name }: User): Promise<UserModel> {
 		return await this.prismaService.client.userModel.create({
 			data: {
 				email,
 				password,
-				isSanta,
 				name,
 			},
 		});

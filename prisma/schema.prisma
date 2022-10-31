@@ -15,7 +15,8 @@ model UserModel {
   email     String
   password  String
   name      String
-  isSanta   Boolean
+  isSanta   Boolean @default(false)
+  isHasSanta   Boolean @default(false)
   wishes    WishModel[]
 }
 

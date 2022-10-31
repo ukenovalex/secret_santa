@@ -7,6 +7,7 @@ export class User {
 		private readonly _email: string,
 		private readonly _name: string,
 		private readonly _isSanta: boolean,
+		private readonly _isHasSanta: boolean,
 		passwordHash?: string,
 	) {
 		if (passwordHash) {
@@ -26,7 +27,11 @@ export class User {
 		return this._password;
 	}
 
-	get isSanta() {
+	get isSanta(): boolean {
+		return this._isHasSanta;
+	}
+
+	get isHasSanta(): boolean {
 		return this._isSanta;
 	}
 
