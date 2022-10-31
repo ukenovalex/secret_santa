@@ -19,6 +19,8 @@ import IWishController from './wishes/wish.controller.interface';
 import { WishController } from './wishes/wish.controller';
 import { IWishService } from './wishes/wish.service.interface';
 import { WishService } from './wishes/wish.service';
+import { IWishRepository } from './wishes/wish.repository.interface';
+import { WishRepository } from './wishes/wish.repository';
 
 interface IBootstrap {
 	app: App;
@@ -35,6 +37,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<IPrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
+	bind<IWishRepository>(TYPES.WishRepository).to(WishRepository).inSingletonScope;
 	bind<App>(TYPES.Application).to(App);
 });
 

@@ -19,19 +19,19 @@ export class WishController extends BaseController implements IWishController {
 		super(loggerService);
 		this.bindRoutes([
 			{
-				path: '/wish',
+				path: '/',
 				method: 'get',
 				func: this.getWishList,
 				middlewares: [new AuthGuard()],
 			},
 			{
-				path: '/wish',
-				method: 'put',
-				func: this.setWish,
+				path: '/',
+				method: 'post',
+				func: this.createWish,
 				middlewares: [new AuthGuard()],
 			},
 			{
-				path: '/wish',
+				path: '/',
 				method: 'delete',
 				func: this.removeWish,
 				middlewares: [new AuthGuard()],
@@ -42,24 +42,24 @@ export class WishController extends BaseController implements IWishController {
 		const wishList = await this.wishService.getWishList(user);
 		this.ok(res, { wishList });
 	}
-	async setWish(
-		{ body }: Request<{}, {}, WishSaveDto>,
+	async createWish(
+		{ body, user }: Request<{}, {}, WishSaveDto>,
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		const result = await this.wishService.setWish(body);
+		const result = await this.wishService.createWish(body, user);
 		if (!result) {
 			this.loggerService.error('Set Wish Is Error');
 			return next(new HTTPError(400, 'Set Wish Is Error'));
 		}
-		this.send(res, 201, `Wish ${body.message} saved to ${body.user_id}`);
+		this.send(res, 201, `Wish ${body.message} saved to ${user}`);
 	}
 	async removeWish(
 		{ body }: Request<{}, {}, WishRemoveDto>,
 		res: Response,
 		next: NextFunction,
 	): Promise<void> {
-		const result = await this.wishService.removeWish(body);
+		const result = await this.wishService.removeWish(body.id);
 		if (!result) {
 			this.loggerService.error('Remove Wish Is Error');
 			return next(new HTTPError(400, 'Remove Wish Is Error'));

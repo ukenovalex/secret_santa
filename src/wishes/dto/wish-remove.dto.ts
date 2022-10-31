@@ -1,3 +1,3 @@
 export class WishRemoveDto {
-	id: string;
+	id: number;
 }

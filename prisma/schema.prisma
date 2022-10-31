@@ -15,6 +15,7 @@ model UserModel {
   email     String
   password  String
   name      String
+  image     String @default("")
   isSanta   Boolean @default(false)
   isHasSanta   Boolean @default(false)
   wishes    WishModel[]
