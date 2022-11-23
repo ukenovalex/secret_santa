@@ -21,6 +21,12 @@ import { IWishService } from './wishes/wish.service.interface';
 import { WishService } from './wishes/wish.service';
 import { IWishRepository } from './wishes/wish.repository.interface';
 import { WishRepository } from './wishes/wish.repository';
+import ISantaController from './santa/santa.controller.interface';
+import { SantaController } from './santa/santa.controller';
+import { ISantaService } from './santa/santa.service.interface';
+import { SantaService } from './santa/santa.service';
+import { ISantaRepository } from './santa/santa.repository.interface';
+import { SantaRepository } from './santa/santa.repository';
 
 interface IBootstrap {
 	app: App;
@@ -37,7 +43,10 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 	bind<IConfigService>(TYPES.ConfigService).to(ConfigService).inSingletonScope();
 	bind<IPrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 	bind<IUserRepository>(TYPES.UserRepository).to(UserRepository).inSingletonScope();
-	bind<IWishRepository>(TYPES.WishRepository).to(WishRepository).inSingletonScope;
+	bind<IWishRepository>(TYPES.WishRepository).to(WishRepository).inSingletonScope();
+	bind<ISantaController>(TYPES.ISantaController).to(SantaController).inSingletonScope();
+	bind<ISantaService>(TYPES.ISantaService).to(SantaService).inSingletonScope();
+	bind<ISantaRepository>(TYPES.ISantaRepository).to(SantaRepository).inSingletonScope();
 	bind<App>(TYPES.Application).to(App);
 });
 

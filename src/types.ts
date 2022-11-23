@@ -10,4 +10,7 @@ export const TYPES = {
 	UserRepository: Symbol.for('UserRepository'),
 	WishRepository: Symbol.for('WishRepository'),
 	IWishService: Symbol.for('IWishService'),
+	ISantaController: Symbol.for('ISantaController'),
+	ISantaService: Symbol.for('ISantaService'),
+	ISantaRepository: Symbol.for('ISantaRepository'),
 };

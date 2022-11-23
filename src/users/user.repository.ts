@@ -17,9 +17,20 @@ export class UserRepository implements IUserRepository {
 			},
 		});
 	}
+	async update({ email, password, name }: User): Promise<UserModel> {
+		return await this.prismaService.client.userModel.update({
+			where: {
+				email,
+			},
+			data: {
+				password,
+				name,
+			},
+		});
+	}
 
 	async find(email: string): Promise<(UserModel & { wishes: WishModel[] }) | null> {
-		return this.prismaService.client.userModel.findFirst({
+		return await this.prismaService.client.userModel.findFirst({
 			where: {
 				email,
 			},

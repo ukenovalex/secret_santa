@@ -12,6 +12,7 @@ import { IPrismaService } from './database/prisma.service.interface';
 import 'reflect-metadata';
 import { AuthMiddleware } from './common/auth.middleware';
 import IWishController from './wishes/wish.controller.interface';
+import ISantaController from './santa/santa.controller.interface';
 
 @injectable()
 export class App {
@@ -26,6 +27,7 @@ export class App {
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: IExceptionFilter,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 		@inject(TYPES.PrismaService) private prismaService: IPrismaService,
+		@inject(TYPES.ISantaController) private santaController: ISantaController,
 	) {
 		this.app = express();
 		this.port = 8000;
@@ -40,6 +42,7 @@ export class App {
 	useRoutes(): void {
 		this.app.use('/api', this.userController.getRouter());
 		this.app.use('/api', this.wishController.getRouter());
+		this.app.use('/api', this.santaController.getRouter());
 	}
 
 	useExceptionFilters(): void {
