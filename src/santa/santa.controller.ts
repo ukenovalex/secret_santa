@@ -48,16 +48,20 @@ export class SantaController extends BaseController implements ISantaController 
 	}
 
 	async getDonee({ user }: Request, res: Response, next: NextFunction): Promise<void> {
-		const result = await this.santaService.getDonee(user);
-		if (!result) {
-			const message = 'С вашим одаряемым что то не то';
-			this.loggerService.error(message);
-			return next(new HTTPError(400, message));
+		try {
+			const result = await this.santaService.getDonee(user);
+			if (!result) {
+				const message = 'С вашим одаряемым что то не то';
+				this.loggerService.error(message);
+				return next(new HTTPError(400, message));
+			}
+			this.ok(res, {
+				name: result.name,
+				wishes: result.wishes,
+			});
+		} catch (e: any | HTTPError) {
+			return next(new HTTPError(422, 'Не ври! Ты не санта!'));
 		}
-		this.ok(res, {
-			name: result.name,
-			wishes: result.wishes,
-		});
 	}
 
 	getRouter(): Router {

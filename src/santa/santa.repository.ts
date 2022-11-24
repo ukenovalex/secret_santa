@@ -18,6 +18,9 @@ export class SantaRepository implements ISantaRepository {
 				email: {
 					not: email,
 				},
+				donee_id: {
+					not: id,
+				},
 				isHasSanta: false,
 				isSanta: true,
 			},
