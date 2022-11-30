@@ -30,7 +30,7 @@ export class App {
 		@inject(TYPES.ISantaController) private santaController: ISantaController,
 	) {
 		this.app = express();
-		this.port = 8000;
+		this.port = +configService.get('APP_PORT') || 3000;
 	}
 
 	useMiddleware(): void {
