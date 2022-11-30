@@ -3,3 +3,4 @@
 /dist
 /.clinic
 .DS_Store
+.env
