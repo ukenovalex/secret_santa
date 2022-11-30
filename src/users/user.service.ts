@@ -26,9 +26,7 @@ export class UserService implements IUserService {
 			}
 			return null;
 		}
-		const salt = this.configService.get('SALT');
-		await newUser.setPassword(password, Number(salt));
-		return await this.userRepository.create(newUser);
+		return null;
 	}
 
 	async validateUser({ email, password }: UserLoginDto): Promise<boolean> {

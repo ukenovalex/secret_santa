@@ -2,4 +2,4 @@
 /.vs
 /dist
 /.clinic
-/prisma/migrations/*
+.DS_Store
