@@ -42,7 +42,7 @@ export class WishController extends BaseController implements IWishController {
 			this.loggerService.error('Set Wish Is Error');
 			return next(new HTTPError(400, 'Set Wish Is Error'));
 		}
-		this.send(res, 201, `Wish ${body.message} saved to ${user}`);
+		this.send(res, 201, result);
 	}
 	async removeWish(
 		{ body }: Request<{}, {}, WishRemoveDto>,
