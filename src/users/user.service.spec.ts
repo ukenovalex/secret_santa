@@ -15,6 +15,7 @@ const ConfigServiceMock: IConfigService = {
 const UserRepositoryMock: IUserRepository = {
 	create: jest.fn(),
 	find: jest.fn(),
+	update: jest.fn(),
 };
 
 const container = new Container();
@@ -41,6 +42,10 @@ describe('User Service', () => {
 				email: user.email,
 				password: user.password,
 				id: 1,
+				donee_id: null,
+				image: '',
+				isHasSanta: false,
+				isSanta: false,
 			}),
 		);
 		const createdUser = await userService.createUser({
