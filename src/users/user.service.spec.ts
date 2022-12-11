@@ -16,6 +16,7 @@ const UserRepositoryMock: IUserRepository = {
 	create: jest.fn(),
 	find: jest.fn(),
 	update: jest.fn(),
+	findAll: jest.fn(),
 };
 
 const container = new Container();

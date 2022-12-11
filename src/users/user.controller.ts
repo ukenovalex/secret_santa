@@ -20,7 +20,6 @@ export class UserController extends BaseController implements IUserController {
 	constructor(
 		@inject(TYPES.ILogger) private loggerService: ILogger,
 		@inject(TYPES.IUserService) private userService: IUserService,
-		@inject(TYPES.IWishService) private wishService: IWishService,
 		@inject(TYPES.ConfigService) private configService: IConfigService,
 	) {
 		super(loggerService);
@@ -41,6 +40,12 @@ export class UserController extends BaseController implements IUserController {
 				path: '/user/info',
 				method: 'get',
 				func: this.info,
+				middlewares: [new AuthGuard()],
+			},
+			{
+				path: '/user/all',
+				method: 'get',
+				func: this.getAllUsers,
 				middlewares: [new AuthGuard()],
 			},
 		]);
@@ -92,6 +97,15 @@ export class UserController extends BaseController implements IUserController {
 			isSanta: foundedUser?.isSanta,
 			wishes: foundedUser.wishes,
 		});
+	}
+
+	async getAllUsers({ user }: Request, res: Response, next: NextFunction): Promise<void> {
+		const userList = await this.userService.getAllUsers(user);
+		if (userList.length > 0) {
+			this.ok(res, userList);
+		} else {
+			return next(new HTTPError(400, 'User list is empty'));
+		}
 	}
 
 	private signJWT(email: string, secret: string): Promise<string> {

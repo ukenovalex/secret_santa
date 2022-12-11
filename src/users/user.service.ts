@@ -5,6 +5,7 @@ import { TYPES } from '../types';
 import { UserLoginDto } from './dto/user-login.dto';
 import { UserRegisterDto } from './dto/user-register.dto';
 import { User } from './user.entity';
+import { User as UserResponseModel } from './models/user.model';
 import { IUserRepository } from './user.repository.interface';
 import { IUserService } from './user.service.interface';
 
@@ -40,5 +41,9 @@ export class UserService implements IUserService {
 
 	async getUserInfo(email: string): Promise<(UserModel & { wishes: WishModel[] }) | null> {
 		return this.userRepository.find(email);
+	}
+
+	async getAllUsers(email: string): Promise<UserResponseModel[]> {
+		return this.userRepository.findAll(email);
 	}
 }
