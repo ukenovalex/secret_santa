@@ -41,6 +41,9 @@ export class UserRepository implements IUserRepository {
 
 	async findAll(email: string): Promise<UserResponseModel[]> {
 		const users = await this.prismaService.client.userModel.findMany({
+			orderBy: {
+				name: 'desc',
+			},
 			where: {
 				email: {
 					not: email,
